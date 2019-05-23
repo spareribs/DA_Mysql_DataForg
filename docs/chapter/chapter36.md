@@ -25,33 +25,18 @@ mysql> SELECT biao1.*  FROM SC AS biao1  WHERE ( SELECT COUNT( CId ) FROM SC WHE
 6 rows in set (0.00 sec)
 ```
 
-```mysql
-
-```
-
-```mysql
-
-```
-
-```mysql
-
-```
-
-```mysql
-
-```
-
-```mysql
-
-```
-
 
 
 # 总结
 
+参考文章：
+
+- <https://blog.csdn.net/acmain_chm/article/details/4126306>
+- <https://bbs.csdn.net/topics/390319304>
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~
 
 
-参考：<https://blog.csdn.net/acmain_chm/article/details/4126306>
-
-<https://bbs.csdn.net/topics/390319304>
 

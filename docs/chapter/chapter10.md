@@ -7,7 +7,7 @@
 
 # 解释
 
-查询张三老师的课程
+首选，查询张三老师的课程
 
 ```mysql
 mysql> SELECT CId FROM Course WHERE TId IN (SELECT TId FROM Teacher WHERE Teacher.Tname = "张三");
@@ -19,7 +19,7 @@ mysql> SELECT CId FROM Course WHERE TId IN (SELECT TId FROM Teacher WHERE Teache
 1 row in set (0.00 sec)
 ```
 
-使用学生和课程做左连接，得到了所有的可能性
+然后，使用学生和课程做左连接，得到了所有的可能性
 
 ```mysql
 mysql> SELECT Student.SId, biao1.CId FROM Student, (SELECT CId FROM Course WHERE TId IN (SELECT TId FROM Teacher WHERE Teacher.Tname = "张三")) AS biao1;
@@ -59,7 +59,7 @@ mysql> SELECT biao2.SId FROM (SELECT Student.SId, biao1.CId FROM Student, (SELEC
 6 rows in set (0.00 sec)
 ```
 
-查询表格，不在这个范围内的
+最后，查询表格，不在这个范围内的
 
 ```mysql
 
@@ -79,5 +79,7 @@ mysql> SELECT * FROM Student WHERE SId NOT IN (SELECT biao2.SId FROM (SELECT Stu
 
 
 
-# 总结
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~
 

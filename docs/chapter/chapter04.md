@@ -10,6 +10,10 @@
 
 ## 题4.1：查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩(没成绩的显示为null)  
 
+明确需要查询的数据表：成绩表（SC）和学生表（Student）
+
+首先，通过分组得到参加课程的数量和总分
+
 ```mysql
 mysql> SELECT SId,Count(SId),SUM(Score) FROM SC GROUP BY SId;   
 +------+------------+------------+
@@ -27,7 +31,7 @@ mysql> SELECT SId,Count(SId),SUM(Score) FROM SC GROUP BY SId;
 
 ```
 
-
+然后，通过左链接，将成绩表（SC）和学生表（Student）的信息链接起来
 
 ```mysql
 mysql> SELECT biao1.SId, biao1.Sname, biao2.countcourse, biao2.sumscore FROM Student AS biao1 LEFT JOIN (SELECT SId, Count(CId) AS countcourse, SUM(Score) AS sumscore FROM SC GROUP BY SId) AS biao2 ON biao1.SId=biao2.SId;   
@@ -48,9 +52,35 @@ mysql> SELECT biao1.SId, biao1.Sname, biao2.countcourse, biao2.sumscore FROM Stu
 | 13   | 孙七   |        NULL |     NULL |
 +------+--------+-------------+----------+
 12 rows in set (0.00 sec)
+
 ```
 
 ## 题4.2：查有成绩的学生信息
+
+首先，我们来看一组测试，这里EXISTS好像跟学生表（Student）的信息不是一样的吗？
+
+```mysql
+mysql> SELECT * FROM Student WHERE EXISTS(SELECT SId FROM SC); 
++------+--------+---------------------+------+
+| SId  | Sname  | Sage                | Ssex |
++------+--------+---------------------+------+
+| 01   | 赵雷   | 1990-01-01 00:00:00 | 男   |
+| 02   | 钱电   | 1990-12-21 00:00:00 | 男   |
+| 03   | 孙风   | 1990-05-20 00:00:00 | 男   |
+| 04   | 李云   | 1990-08-06 00:00:00 | 男   |
+| 05   | 周梅   | 1991-12-01 00:00:00 | 女   |
+| 06   | 吴兰   | 1992-03-01 00:00:00 | 女   |
+| 07   | 郑竹   | 1989-07-01 00:00:00 | 女   |
+| 09   | 张三   | 2017-12-20 00:00:00 | 女   |
+| 10   | 李四   | 2017-12-25 00:00:00 | 女   |
+| 11   | 李四   | 2017-12-30 00:00:00 | 女   |
+| 12   | 赵六   | 2017-01-01 00:00:00 | 女   |
+| 13   | 孙七   | 2018-05-18 00:00:00 | 女   |
++------+--------+---------------------+------+
+12 rows in set (0.00 sec)
+```
+
+换一种方式：EXISTS加WHERE做判断，这就是我们想要的结果
 
 ```mysql
 mysql> SELECT * FROM Student WHERE EXISTS(SELECT * FROM SC WHERE Student.SId=SC.SId);
@@ -71,3 +101,14 @@ mysql> SELECT * FROM Student WHERE EXISTS(SELECT * FROM SC WHERE Student.SId=SC.
 
 
 # 总结
+
+这一波题目主要考察是：
+
+1. Count(),SUM() 等函数结合 GROUP BY 的使用
+2. EXISTS(WHERE) 的使用，`切记`：一定要加WHERE条件
+
+
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

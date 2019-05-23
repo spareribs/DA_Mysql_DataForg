@@ -5,6 +5,10 @@
 
 # 解释
 
+方法一：
+
+简单粗暴的方法
+
 ```mysql
 mysql> SELECT * FROM Student WHERE Sage LIKE "%1990%";
 +------+--------+---------------------+------+
@@ -17,6 +21,10 @@ mysql> SELECT * FROM Student WHERE Sage LIKE "%1990%";
 +------+--------+---------------------+------+
 4 rows in set, 1 warning (0.00 sec)
 ```
+
+方法二：
+
+使用这种方法更加优雅
 
 ```mysql
 mysql> SELECT * FROM Student WHERE YEAR(Student.Sage)=1990; 
@@ -31,7 +39,8 @@ mysql> SELECT * FROM Student WHERE YEAR(Student.Sage)=1990;
 4 rows in set (0.00 sec)
 ```
 
-
-
 # 总结
 
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

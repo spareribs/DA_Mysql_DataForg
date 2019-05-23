@@ -7,7 +7,7 @@
 
 # 解释
 
-首先得到平均成绩
+首先，分组统计得到平均成绩
 
 ```mysql
 mysql> SELECT SId, AVG(score) AS avgscore FROM SC GROUP BY SId;
@@ -25,7 +25,7 @@ mysql> SELECT SId, AVG(score) AS avgscore FROM SC GROUP BY SId;
 7 rows in set (0.00 sec)
 ```
 
-然后将课程成绩和平均成绩结合起来进行排序
+然后，将课程成绩和平均成绩结合起来进行排序
 
 ```mysql
 mysql> SELECT SC.*, biao1.avgscore FROM SC LEFT JOIN (SELECT SId, AVG(score) AS avgscore FROM SC GROUP BY SId) AS biao1 ON SC.SId=biao1.SId ORDER BY biao1.avgscore DESC;
@@ -54,7 +54,11 @@ mysql> SELECT SC.*, biao1.avgscore FROM SC LEFT JOIN (SELECT SId, AVG(score) AS 
 18 rows in set (0.00 sec)
 ```
 
-
-
 # 总结
 
+题目不难，主要是一些过程和思路梳理清楚
+
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

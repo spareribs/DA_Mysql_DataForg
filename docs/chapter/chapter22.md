@@ -5,6 +5,8 @@
 
 # 解释
 
+与题目5类似
+
 ```mysql
 mysql> SELECT * FROM Student WHERE Sname LIKE "%风%";  
 +------+--------+---------------------+------+
@@ -15,5 +17,8 @@ mysql> SELECT * FROM Student WHERE Sname LIKE "%风%";
 1 row in set (0.00 sec)
 ```
 
-# 结
+# 总结
 
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

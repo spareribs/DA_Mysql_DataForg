@@ -7,7 +7,9 @@
 
 # 解释
 
-先查询01同学所有的课程
+明确需要查询的数据表：成绩表（`SC`）和学生表（`Student`）
+
+首先，查询01同学所有的课程
 
 ```mysql
 mysql> SELECT CId FROM SC WHERE SId = "01";
@@ -21,7 +23,7 @@ mysql> SELECT CId FROM SC WHERE SId = "01";
 3 rows in set (0.00 sec)
 ```
 
-得到所有学生和所有课程的组合：
+然后，得到所有学生和所有课程的组合：
 
 ```mysql
 mysql> SELECT Student.SId, biao1.CId FROM Student, (SELECT CId FROM SC WHERE SId = "01") AS biao1;
@@ -68,7 +70,7 @@ mysql> SELECT Student.SId, biao1.CId FROM Student, (SELECT CId FROM SC WHERE SId
 36 rows in set (0.00 sec)
 ```
 
-与课程表左连接
+接着，与课程表左连接
 
 ```mysql
 mysql> SELECT * FROM (SELECT Student.SId, biao1.Cid FROM Student, (SELECT CId FROM SC WHERE SId = "01") AS biao1) AS biao2 LEFT JOIN SC ON SC.SId=biao2.SId;
@@ -164,7 +166,7 @@ mysql> SELECT DISTINCT biao2.SId FROM (SELECT Student.SId, biao1.Cid FROM Studen
 5 rows in set (0.00 sec)
 ```
 
-最后剩下的小伙伴的信息也有了
+最后，与01同学学习相同课程的小伙伴的信息就有
 
 ```mysql
 mysql> SELECT * FROM Student WHERE SId NOT IN (SELECT DISTINCT biao2.SId FROM (SELECT Student.SId, biao1.Cid FROM Student, (SELECT CId FROM SC WHERE SId = "01") AS biao1) AS biao2 LEFT JOIN SC ON SC.SId=biao2.SId WHERE SC.SId IS NULL) AND SId != "01";  
@@ -184,4 +186,16 @@ mysql> SELECT * FROM Student WHERE SId NOT IN (SELECT DISTINCT biao2.SId FROM (S
 
 
 # 总结
+
+这一波题目主要考察是：
+
+1. LEFT JOIN
+2. DISTINCT
+3. WHERE
+
+
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~
 

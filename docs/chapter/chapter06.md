@@ -7,6 +7,12 @@
 
 # 解释
 
+明确需要查询的数据表：教师表（`Teacher`）和学生表（`Student`）
+
+方法一：
+
+首先，查询 张三 老师的课程TId
+
 ```mysql
 mysql> SELECT TId FROM Teacher WHERE Tname="张三";     
 +------+
@@ -17,7 +23,7 @@ mysql> SELECT TId FROM Teacher WHERE Tname="张三";
 1 row in set (0.00 sec)
 ```
 
-个人实现的方法：
+然后，通过通过WHERE IN的方法实现，通过TId找CId，通过CId找SId
 
 ```mysql
 mysql> SELECT * FROM Student WHERE Student.SId IN (SELECT SId FROM SC WHERE SC.CId IN (SELECT CId FROM Course WHERE TId IN (SELECT TId FROM Teacher WHERE Tname="张三")));
@@ -34,7 +40,9 @@ mysql> SELECT * FROM Student WHERE Student.SId IN (SELECT SId FROM SC WHERE SC.C
 6 rows in set (0.00 sec)
 ```
 
-答案中的方法：
+方法二：
+
+这里方法就是一个笛卡儿积
 
 ```mysql
 mysql> SELECT Student.* FROM Teacher, Course, Student, SC WHERE Teacher.Tname='张三'  AND Teacher.TId=Course.TId AND Course.CId=SC.CId AND SC.SId=Student.SId;
@@ -54,4 +62,10 @@ mysql> SELECT Student.* FROM Teacher, Course, Student, SC WHERE Teacher.Tname='�
 
 
 # 总结
+
+这一题没有新的知识点，思路局限，个人觉得第二种方法更加好~
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~
 

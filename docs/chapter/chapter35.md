@@ -9,7 +9,7 @@
 
 # 解释
 
-先把2个成绩表做笛卡尔积，然后通过条件判断把需要的学习信息提取出来
+首先，先把2个成绩表做笛卡尔积，然后通过条件判断把需要的学习信息提取出来
 
 ```mysql
 mysql> SELECT biao1.*, biao2.* FROM SC AS biao1, SC AS biao2 WHERE biao1.CId != biao2.CId AND biao1.SId != biao2.SId AND biao1.score=biao2.score;
@@ -30,7 +30,7 @@ mysql> SELECT biao1.*, biao2.* FROM SC AS biao1, SC AS biao2 WHERE biao1.CId != 
 10 rows in set (0.00 sec)
 ```
 
-直接使用去重把结果筛选出来
+然后，直接使用去重把结果筛选出来
 
 ```mysql
 mysql> SELECT DISTINCT biao1.*  FROM SC AS biao1, SC AS biao2 WHERE biao1.CId != biao2.CId AND biao1.SId != biao2.SId AND biao1.score=biao2.score; 
@@ -46,7 +46,9 @@ mysql> SELECT DISTINCT biao1.*  FROM SC AS biao1, SC AS biao2 WHERE biao1.CId !=
 5 rows in set (0.00 sec)
 ```
 
-
-
 # 总结
 
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

@@ -5,6 +5,33 @@
 
 # 解释
 
+首先确认下数据库种的标记年龄相关的数据，Sage（1990-01-01 00:00:00）
+
+```mysql
+mysql> SElECT * FROM Student; 
++------+--------+---------------------+------+
+| SId  | Sname  | Sage                | Ssex |
++------+--------+---------------------+------+
+| 01   | 赵雷   | 1990-01-01 00:00:00 | 男   |
+| 02   | 钱电   | 1990-12-21 00:00:00 | 男   |
+| 03   | 孙风   | 1990-05-20 00:00:00 | 男   |
+| 04   | 李云   | 1990-08-06 00:00:00 | 男   |
+| 05   | 周梅   | 1991-12-01 00:00:00 | 女   |
+| 06   | 吴兰   | 1992-03-01 00:00:00 | 女   |
+| 07   | 郑竹   | 1989-07-01 00:00:00 | 女   |
+| 09   | 张三   | 2017-12-20 00:00:00 | 女   |
+| 10   | 李四   | 2017-12-25 00:00:00 | 女   |
+| 11   | 李四   | 2017-12-30 00:00:00 | 女   |
+| 12   | 赵六   | 2017-01-01 00:00:00 | 女   |
+| 13   | 孙七   | 2018-05-18 00:00:00 | 女   |
++------+--------+---------------------+------+
+12 rows in set (0.00 sec)
+```
+
+简单点就是统计年份差，可以看图，理解下`TIMESTAMPDIFF`这个函数，这类型的函数太多了，用着简单记住，以后能查就可以了，参考链接 [点击跳转](<https://www.w3resource.com/mysql/date-and-time-functions/date-and-time-functions.php>)
+
+![](.\assets\mysql-timestampdiff-function.png)
+
 ```mysql
 mysql> SELECT TIMESTAMPDIFF(YEAR, Student.Sage, CURDATE()) AS 学生年龄 FROM Student;       
 +--------------+
@@ -25,6 +52,8 @@ mysql> SELECT TIMESTAMPDIFF(YEAR, Student.Sage, CURDATE()) AS 学生年龄 FROM 
 +--------------+
 12 rows in set (0.00 sec)
 ```
+
+打印下学生编号和学生姓名
 
 ```mysql
 mysql> SELECT Student.SId AS 学生编号, Student.Sname AS 学生姓名, TIMESTAMPDIFF(YEAR, Student.Sage, CURDATE()) AS 学生年龄 FROM Student;
@@ -48,23 +77,8 @@ mysql> SELECT Student.SId AS 学生编号, Student.Sname AS 学生姓名, TIMEST
 
 ```
 
-```mysql
-
-```
-
-```mysql
-
-```
-
-```mysql
-
-```
-
-```mysql
-
-```
-
-
-
 # 总结
 
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

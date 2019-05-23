@@ -7,6 +7,8 @@
 
 # 解释
 
+分组统计即可
+
 ```mysql
 mysql> SELECT Ssex,Count(*) FROM Student GROUP BY Ssex;  
 +------+----------+
@@ -20,3 +22,6 @@ mysql> SELECT Ssex,Count(*) FROM Student GROUP BY Ssex;
 
 # 总结
 
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

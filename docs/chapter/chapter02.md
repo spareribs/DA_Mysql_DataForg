@@ -1,11 +1,15 @@
 [TOC]
 
-# 题目2
+# 题目
 1. 查询平均成绩大于等于 60 分的同学的学生编号和学生姓名和平均成绩
 
-# 解释
 
 
+# 详解
+
+明确需要查询的数据表：成绩表（SC）和学生表（Student）
+
+首先，查询成绩表查询大于60分的成绩
 
 ```mysql
 mysql> SELECT SC.SId ,AVG(SC.score) AS avgscore FROM SC GROUP BY SC.SId HAVING avgscore>=60;           
@@ -21,7 +25,7 @@ mysql> SELECT SC.SId ,AVG(SC.score) AS avgscore FROM SC GROUP BY SC.SId HAVING a
 5 rows in set (0.00 sec)
 ```
 
-
+然后，通过内链接将学生表和成绩表链接起来
 
 ```mysql
 mysql> SELECT biao1.*, biao2.avgscore FROM Student AS biao1 INNER JOIN (SELECT SC.SId ,AVG(SC.score) AS avgscore FROM SC GROUP BY SC.SId HAVING avgscore>=60) AS biao2 WHERE biao1.SId = biao2.SId;
@@ -44,9 +48,7 @@ mysql> SELECT biao1.*, biao2.avgscore FROM Student AS biao1 INNER JOIN (SELECT S
 这一波题目主要考察是：
 
 1. SELECT的使用，使用AS来重命名表
-2. WHERE的使用，AND多重条件
-3. LEFT JOIN ... ON 的使用
-4. WHERE的使用，NOT IN条件
+2. INNER JOIN ... ON 的使用
 
 看到一个关于链接比较好的文章，推荐 <https://segmentfault.com/a/1190000017369618>
 

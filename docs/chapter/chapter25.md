@@ -5,7 +5,7 @@
 
 # 解释
 
-首选查询平均成绩
+题目不难，先分组后排序
 
 ```mysql
 mysql> SELECT CId, AVG(score) AS avgscore FROM SC GROUP BY CId ORDER BY avgscore DESC, CId ASC;  
@@ -21,3 +21,6 @@ mysql> SELECT CId, AVG(score) AS avgscore FROM SC GROUP BY CId ORDER BY avgscore
 
 # 总结
 
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

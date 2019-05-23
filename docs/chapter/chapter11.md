@@ -7,7 +7,7 @@
 
 # 解释
 
-首先是查询不及格的同学
+首先，查询不及格的同学
 
 ```mysql
 mysql> SELECT SId,score FROM SC WHERE score < 60;
@@ -23,7 +23,7 @@ mysql> SELECT SId,score FROM SC WHERE score < 60;
 5 rows in set (0.00 sec)
 ```
 
-分组统计超过2门不及格及平均成绩
+然后，分组统计超过2门不及格及平均成绩
 
 ```mysql
 mysql> SELECT SId, COUNT(SId) AS countsid, AVG(score) AS avgscore FROM SC WHERE score < 60 GROUP BY SId HAVING countsid >= 2;
@@ -36,9 +36,9 @@ mysql> SELECT SId, COUNT(SId) AS countsid, AVG(score) AS avgscore FROM SC WHERE 
 2 rows in set (0.00 sec)
 ```
 
-最后得到学生的信息
+最后，通过学生表得到学生的信息
 
-```
+```mysql
 mysql> SELECT biao1.SId, Student.Sname, biao1.avgscore FROM Student, (SELECT SId, COUNT(SId) AS countsid, AVG(score) AS avgscore FROM SC WHERE score < 60 GROUP BY SId HAVING countsid >= 2) AS biao1 WHERE Student.SId = biao1.SId;
 +------+--------+----------+
 | SId  | Sname  | avgscore |
@@ -52,4 +52,8 @@ mysql> SELECT biao1.SId, Student.Sname, biao1.avgscore FROM Student, (SELECT SId
 
 
 # 总结
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~
 

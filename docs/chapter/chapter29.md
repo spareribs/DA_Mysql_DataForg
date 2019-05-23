@@ -7,6 +7,8 @@
 
 # 解释
 
+又是一道可以用万能的方法做完的题目，笛卡儿积加入条件判断
+
 ```mysql
 mysql> SELECT Student.Sname, Course.Cname, SC.score FROM Student, SC, Course WHERE SC.score >=70 AND Student.SId = SC.SId AND SC.CId = Course.CId; 
 +--------+--------+-------+
@@ -30,3 +32,6 @@ mysql> SELECT Student.Sname, Course.Cname, SC.score FROM Student, SC, Course WHE
 
 # 总结
 
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

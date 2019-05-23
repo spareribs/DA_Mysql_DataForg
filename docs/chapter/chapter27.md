@@ -5,7 +5,7 @@
 
 # 解释
 
-查询数学课程
+首先，查询数学课程
 
 ```mysql
 mysql> SELECT * FROM Course WHERE Cname = "数学";
@@ -17,7 +17,7 @@ mysql> SELECT * FROM Course WHERE Cname = "数学";
 1 row in set (0.00 sec)
 ```
 
-通过成绩表，查询成绩低于60的学生SId信息
+然后，通过成绩表，查询成绩低于60的学生SId信息
 
 ```mysql
 mysql> SELECT * FROM SC WHERE CId IN (SELECT CId FROM Course WHERE Cname = "数学") AND score <60;
@@ -29,7 +29,7 @@ mysql> SELECT * FROM SC WHERE CId IN (SELECT CId FROM Course WHERE Cname = "数�
 1 row in set (0.00 sec)
 ```
 
-通过学生表，得到学生的姓名
+最后，通过学生表，得到学生的姓名
 
 ```mysql
 mysql> SELECT Student.Sname, biao1.score FROM Student,(SELECT * FROM SC WHERE CId IN (SELECT CId FROM Course WHERE Cname = "数学") AND score <60) AS biao1 WHERE Student.SId = biao1.SId;
@@ -43,3 +43,6 @@ mysql> SELECT Student.Sname, biao1.score FROM Student,(SELECT * FROM SC WHERE CI
 
 # 总结
 
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

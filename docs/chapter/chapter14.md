@@ -7,7 +7,7 @@
 
 # 解释
 
-首先是计算出所有的：最高分，最低分，平均分，选修人数
+首先，是计算出所有的：最高分，最低分，平均分，选修人数
 
 ```mysql
 mysql> SELECT CId, MAX(score) AS 最高分 , MIN(score) AS 最低分, AVG(score) AS 平均分, COUNT(*) AS 选修人数 FROM SC GROUP BY CId;
@@ -21,7 +21,7 @@ mysql> SELECT CId, MAX(score) AS 最高分 , MIN(score) AS 最低分, AVG(score)
 3 rows in set (0.00 sec)
 ```
 
-对结果进行排序
+然后，对结果进行排序
 
 ```mysql
 mysql> SELECT CId, MAX(score) AS 最高分 , MIN(score) AS 最低分, AVG(score) AS 平均分, COUNT(*) AS 选修人数 FROM SC GROUP BY CId ORDER BY COUNT(*) DESC, SC.CId ASC;
@@ -49,9 +49,10 @@ mysql> SELECT CId, MAX(score) AS 最高分 , MIN(score) AS 最低分, AVG(score)
 3 rows in set (0.00 sec)
 ```
 
-
-
-
-
 # 总结
 
+新出现的方法： CASE WHEN THEN ELSE END
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~

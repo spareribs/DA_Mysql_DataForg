@@ -3,11 +3,13 @@
 # 题目
 1. 查询没有学全所有课程的同学的信息
 
-
-
 # 解释
 
-所有课程的数量：
+明确需要查询的数据表：课程表（`Course`）、学生表（`Student`）和成绩表（`SC`）
+
+方法一：
+
+首先，等到所有课程的数量：
 
 ```mysql
 mysql> SELECT Count(*) FROM Course;
@@ -20,7 +22,7 @@ mysql> SELECT Count(*) FROM Course;
 
 ```
 
-通过SC表统计小于3的同学
+然后，通过成绩表（`SC`）表统计学习课程数少于3的同学
 
 ```mysql
 mysql> SELECT SId,COUNT(CId) AS countcid FROM SC GROUP BY SId HAVING countcid < 3;
@@ -34,7 +36,7 @@ mysql> SELECT SId,COUNT(CId) AS countcid FROM SC GROUP BY SId HAVING countcid < 
 3 rows in set (0.00 sec)
 ```
 
-然后与学生表做笛卡儿积（这种方法会漏掉一门都没有选的同学）
+最后，与学生表做笛卡儿积（这种方法会漏掉一门都没有选的同学）
 
 ```mysql
 mysql> SELECT * FROM Student INNER JOIN (SELECT SId,COUNT(CId) AS countcid FROM SC GROUP BY SId HAVING countcid < (SELECT Count(*) FROM Course)) AS biao1 ON Student.SId = biao1.SId;
@@ -50,7 +52,7 @@ mysql> SELECT * FROM Student INNER JOIN (SELECT SId,COUNT(CId) AS countcid FROM 
 
 方法二：
 
-先得到一张笛卡儿积的表
+首先，学生表（`Student`）和成绩表（`SC`）得到一张笛卡儿积的表
 
 ```mysql
 mysql> SELECT Student.*,SC.CId FROM Student LEFT JOIN SC on Student.SId=SC.SId;
@@ -84,7 +86,7 @@ mysql> SELECT Student.*,SC.CId FROM Student LEFT JOIN SC on Student.SId=SC.SId;
 23 rows in set (0.00 sec)
 ```
 
-然后通过GROUP BY 和 HAVING得到低于3们课程的同学
+然后，通过GROUP BY 和 HAVING得到低于3们课程的同学
 
 ```mysql
 mysql> SELECT biao1.SId, COUNT(biao1.CId) AS countsid FROM (SELECT Student.*,SC.CId FROM Student LEFT JOIN SC on Student.SId=SC.SId) AS biao1 GROUP BY biao1.SId HAVING countsid < (SELECT Count(*) FROM Course);
@@ -103,7 +105,7 @@ mysql> SELECT biao1.SId, COUNT(biao1.CId) AS countsid FROM (SELECT Student.*,SC.
 8 rows in set (0.00 sec)
 ```
 
-最后再与学生表合并信息
+最后，再与学生表合并信息
 
 ```mysql
 mysql> SELECT Student.*,biao2.countsid FROM Student JOIN (SELECT biao1.SId, COUNT(biao1.CId) AS countsid FROM (SELECT Student.*,SC.CId FROM Student LEFT JOIN SC on Student.SId=SC.SId) AS biao1 GROUP BY biao1.SId HAVING countsid < (SELECT Count(*) FROM Course)) AS biao2 ON Student.SId = biao2.SId;
@@ -123,4 +125,12 @@ mysql> SELECT Student.*,biao2.countsid FROM Student JOIN (SELECT biao1.SId, COUN
 ```
 
 # 总结
+
+这一波题目主要考察是：
+
+1. GROUP BY HAVING的使用
+
+# 后记
+
+其实没有固定的答案，结构更简单，思路更清晰，查询效率更快的方法，欢迎留言，我们一起学习，一起进步~~
 
